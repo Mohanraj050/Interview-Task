@@ -1,14 +1,14 @@
 package com.example.ontro.myapplication;
 
 import android.content.Intent;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBar;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,15 +22,8 @@ public class MainActivity extends AppCompatActivity implements NewsFeedAdapter.N
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mNewsFeedListView  = (RecyclerView) findViewById(R.id.activity_main_rv);
-        mToolbar = (Toolbar) findViewById(R.id.activity_main_toolbar);
-        setSupportActionBar(mToolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null) {
-            actionBar.setTitle(Constants.DefaultText.NEWS_FEED);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+//        mToolbar = (Toolbar) findViewById(R.id.activity_main_toolbar);
 
-        mToolbar.setTitleTextColor(ContextCompat.getColor(MainActivity.this, android.R.color.white));
 
         ApiInterface apiInterface = APIHandler.getClient().create(ApiInterface.class);
         Call<NewsFeedResponse> call = apiInterface.getNewsDetail();
@@ -58,11 +51,16 @@ public class MainActivity extends AppCompatActivity implements NewsFeedAdapter.N
     }
 
     @Override
-    public void onItemViewClicked(Post post) {
+    public void onItemViewClicked(View v, Post post) {
         Intent intent = new Intent(MainActivity.this, NewsFeedDetailActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable(Constants.BundleKeys.POST, post);
         intent.putExtras(bundle);
-        startActivity(intent);
+        ActivityOptionsCompat options = ActivityOptionsCompat.
+                makeSceneTransitionAnimation(MainActivity.this,
+                        v,
+                        ViewCompat.getTransitionName(v));
+
+        startActivity(intent, options.toBundle());
     }
 }

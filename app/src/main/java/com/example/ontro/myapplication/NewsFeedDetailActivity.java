@@ -15,7 +15,7 @@ public class NewsFeedDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_feed_detail);
-        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+//        overridePendingTransition(R.anim.fadein, 0);
         initView();
         setValue();
     }
@@ -32,6 +32,9 @@ public class NewsFeedDetailActivity extends AppCompatActivity {
             Bundle bundle = getIntent().getExtras();
             Post post = (Post) bundle.getSerializable(Constants.BundleKeys.POST);
             if(post != null) {
+                mNewsFeedImageView.setTransitionName(getString(R.string.activity_image_transition));
+                mNewsFeedTitleView.setTransitionName(getString(R.string.activity_text_transition));
+
                 mNewsFeedTitleView.setText(post.getTitle());
                 mNewsFeedContentView.setText(post.getContent());
                 Glide.with(NewsFeedDetailActivity.this)

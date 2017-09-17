@@ -8,14 +8,14 @@
     android:background="#FFFAF0"
     tools:context="com.example.ontro.myapplication.MainActivity">
 
-    <android.support.v7.widget.Toolbar
+   <!-- <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:id="@+id/activity_main_toolbar"
         android:title="News Feed"
         android:background="@color/colorPrimary">
 
-    </android.support.v7.widget.Toolbar>
+    </android.support.v7.widget.Toolbar>-->
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

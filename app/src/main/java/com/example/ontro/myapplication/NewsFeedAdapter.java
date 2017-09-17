@@ -37,18 +37,21 @@ class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.NewsFeedViewH
     }
 
     @Override
-    public void onBindViewHolder(NewsFeedViewHolder holder, final int position) {
+    public void onBindViewHolder(final NewsFeedViewHolder holder, final int position) {
         final Post post = mPosts.get(position);
         holder.mNewsFeedTitleView.setText(post.getTitle());
         Glide.with(mContext)
                 .load(post.getFeaturedImage())
                 .dontAnimate()
                 .into(holder.mNewsFeedImageView);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+
+        holder.mNewsFeedImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(mNewsFeedListener != null) {
-                    mNewsFeedListener.onItemViewClicked(post);
+                    holder.mNewsFeedImageView.setTransitionName(mContext.getString(R.string.activity_image_transition));
+                    holder.mNewsFeedTitleView.setTransitionName(mContext.getString(R.string.activity_text_transition));
+                    mNewsFeedListener.onItemViewClicked(v, post);
                 }
             }
         });
@@ -73,6 +76,6 @@ class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.NewsFeedViewH
 
     public interface NewsFeedListener {
 
-        void onItemViewClicked(Post post);
+        void onItemViewClicked(View v, Post post);
     }
 }
