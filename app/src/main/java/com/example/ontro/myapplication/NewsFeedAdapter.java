@@ -55,7 +55,6 @@ class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.NewsFeedViewH
                 }
             }
         });
-
     }
 
     @Override
