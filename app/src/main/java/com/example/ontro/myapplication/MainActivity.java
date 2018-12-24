@@ -13,6 +13,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
+/*This is sample github test*/
 public class MainActivity extends AppCompatActivity implements NewsFeedAdapter.NewsFeedListener {
     private RecyclerView mNewsFeedListView;
     private Toolbar mToolbar;
